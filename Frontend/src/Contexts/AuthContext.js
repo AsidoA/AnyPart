@@ -27,7 +27,9 @@ export function AuthProvider({ children }) {
   }, [user]);
 
   const signIn = () => {
-      axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true}).then((response) => {
+      axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true, headers: {
+    'Access-Control-Allow-Origin': 'https://anypart.netlify.app'
+  }}).then((response) => {
         setUser(response.data);
         if (response.data.type === process.env.REACT_APP_TYPE)
           navigate(process.env.REACT_APP_ADMIN_ROUTE)
