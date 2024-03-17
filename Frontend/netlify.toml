@@ -19,6 +19,6 @@
   status = 200
 
 [[redirects]]
-  from = process.env.REACT_APP_ADMIN_ROUTE
+  from = "/anypartmanagement"
   to = "/index.html"
   status = 200
