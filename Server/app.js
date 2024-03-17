@@ -13,7 +13,7 @@ app.use(session({
     secret: 'AnyPartSession',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 120 },
+    cookie: { maxAge: 1000 * 60 * 120 ,secure: false},
     store: MongoStore.create({ mongoUrl: process.env.MONGO_CONN, dbName: 'anypartdb', collectionName: 'sessions' })
 }));
 app.enable('trust proxy');
@@ -32,7 +32,6 @@ const CategoriesRoute = require('./API/Routes/Categories');
 const GaragesRoute = require('./API/Routes/Garages');
 const SSE = require('./API/Routes/sseRoute');
 
-
 app.use('/users', UserRoute);
 app.use('/categories', CategoriesRoute);
 app.use('/parts', PartsRoute);
@@ -41,9 +40,6 @@ app.use('/notifications', NotificationRoute);
 app.use('/garages', GaragesRoute);
 app.use('/sse',SSE.router);
 app.use('/cookie', CookieRoute);
-
-
-
 
 const uri = process.env.MONGO_CONN;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => { console.log('mongo connected') });
