@@ -1,0 +1,28 @@
+
+.p-dataview{
+  margin-top:-10px;
+}
+
+.progress-spinner{
+  display: flex;
+  margin-top:370px;
+}
+
+.add-btn{
+  background-color: #f59e0b;
+  color: white
+}
+
+
+  @media (max-width: 768px) {
+    .sidebar-view {
+      top: 100%;
+      transform: translate(50%, -50%);
+    }
+    #auto-complete input{
+      width: 180px;
+    }
+    .part-template{
+      margin-left: 14px;
+    }
+  }

@@ -1,0 +1,49 @@
+.order-details {
+  display: flex;
+  align-items: center;
+}
+
+.brand-img {
+  max-width: 100%;
+  margin-right: 20px;
+  margin-bottom: 20px; /* Add margin at the bottom for better spacing */
+}
+
+.car-details {
+  flex-grow: 1;
+}
+
+.text-right {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.card {
+  margin-top: 1rem;
+}
+
+.my-popup-content{
+  width:auto;
+  height:auto;
+}
+
+/* Additional styles for smaller screens */
+@media only screen and (max-width: 767px) {
+  .brand-img {
+    margin-right: 0; 
+  }
+
+  .order-details {
+    flex-direction: column; 
+  }
+  
+  .text-right {
+    text-align: center; 
+    margin-top: 0.5rem;
+  }
+
+  .my-popup-content{
+    width: 100%;
+    height:100%;
+  }
+}

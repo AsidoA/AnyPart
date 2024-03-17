@@ -1,0 +1,122 @@
+.details {
+  margin-top: -10px;
+}
+
+h4 {
+  margin-top: -15px;
+}
+
+.cart-container {
+  box-shadow: inset;
+}
+
+.side {
+  width: 2000px;
+}
+
+.car-container {
+  display: flex;
+  align-items: center;
+  margin-top:-10px;
+}
+
+.car-logo {
+  margin-right: 20px;
+}
+
+.p-datascroller-list {
+  height: auto;
+}
+
+.btn-create-order {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.p-sidebar-mask {
+  background-color: black;
+}
+
+.order-created {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.order-created h1,
+p {
+  margin-top: -20px;
+}
+
+.empty-message-container{
+  height:250px;
+}
+
+.license-plate{
+  display: inline-block;
+  text-decoration: none !important;
+  color: #000;
+  font-weight: 500;
+  padding: 0px 15px 15px 32px;
+  font-size: 20px;
+  border: 2px solid;
+  border-radius: 7px;
+  background-color: #FFCA11;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.25), transparent), url(https://www.check-car.co.il/wp-content/themes/blankslate-child/assets/images/il.svg);
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover, contain;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  height: 35px;
+  line-height: 32.5px;
+}
+
+.license-plate:hover{
+  animation:  shake 0.8s  ; 
+  cursor: pointer;
+}
+
+/*Plate number btn*/
+.update-number {
+  margin-top:-16px;
+  margin-left: 8px;
+}
+/*Plate number btn*/
+
+
+/*SideBarView Button*/
+.sidebarview-btn {
+  border: none;
+  background: none
+}
+
+.shopping-cart-icon {
+  margin-left: 5px;
+  font-size: 1.5rem;
+  color: #f97316;
+  transition: all 0.3s ease;
+
+}
+
+.shopping-cart-icon:hover {
+  color: #b45512;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+/*SideBarView Button*/
+
+@keyframes shake{ 
+  0%{ 
+    transform: translateX(0) 
+  } 
+  25%{ 
+    transform: translateX(15px); 
+  } 
+    
+  50%{ 
+    transform: translateX(-15px); 
+  } 
+  100%{ 
+    transform: translateX(0px); 
+  } 
+} 

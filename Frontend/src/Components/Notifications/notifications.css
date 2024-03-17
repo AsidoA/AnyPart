@@ -1,0 +1,65 @@
+/*Notifications Button*/
+.notification-btn,.notification-card-btn {
+    border: none;
+    background: none
+}
+
+.notification-card-btn{
+    margin-top:42px;
+    margin-left: 5px;
+}
+.notification-card-btn:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+.notification-icon:hover {
+    font-size: 1.3rem;
+    color: rgb(98, 98, 98);
+    cursor: pointer;
+}
+/*Notifications Button*/
+
+
+
+/*Notification Card*/
+.notification-card{
+    margin-top:-20px;
+}
+.notification-card:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+.notification-titel{
+    margin-left: 63px;
+    margin-top:10px;
+    margin-bottom: -17px;
+}
+/*Notification Card*/
+
+
+
+/*No Notifications*/
+.empty-container{
+    text-align: center;
+}
+
+.no-notifications{
+    text-align:center;
+    margin-top: 225px;
+}
+.no-notifications img{
+    margin-bottom:-30px
+}
+.no-notifications p{
+    font-size:20px
+}
+/*No Notifications*/
+
+

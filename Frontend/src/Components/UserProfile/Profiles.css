@@ -1,0 +1,38 @@
+
+.profile-details h2,.cars-knob,.img-profile{
+    text-align: center;
+}
+.user-details-container h4{
+    margin-top:10px;
+}
+.profile-details{
+    width: 25%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user-information {
+  flex: 0 0 calc(30% - 20px);
+}
+
+.card {
+  flex: 0 0 calc(70% - 20px);
+  margin-top: 10px;
+}
+
+.p-carousel-indicators{
+    display: none;
+}
+.order-buttons{
+  margin-left: 180px;
+}
+
+.progress-spinner{
+  margin-top:370px;
+}
+
