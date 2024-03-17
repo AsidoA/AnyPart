@@ -1,0 +1,24 @@
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/choosepart"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/garageindex"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = process.env.REACT_APP_ADMIN_ROUTE
+  to = "/index.html"
+  status = 200
