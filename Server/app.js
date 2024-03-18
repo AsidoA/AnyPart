@@ -13,7 +13,7 @@ app.use(session({
     secret: 'AnyPartSession',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 120,secure:true,sameSite:'strict'},
+    cookie: { maxAge: 1000 * 60 * 120,secure:true,sameSite:'none'},
     store: MongoStore.create({ mongoUrl: process.env.MONGO_CONN, dbName: 'anypartdb', collectionName: 'sessions' })
 }));
 app.enable('trust proxy');
