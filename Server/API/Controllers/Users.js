@@ -33,6 +33,7 @@ module.exports = {
 
                     const UserData = { uid: result[0]._id, email: email, address: result[0].address, city: result[0].city, type: result[0].type, fullname: result[0].user_name, phone: result[0].phone };
                     req.session.user = UserData;
+                    console.log(req.session);
                     req.session.save();
                     return res.status(200).json(UserData.fullname);
                 })
