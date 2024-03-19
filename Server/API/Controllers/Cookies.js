@@ -2,6 +2,7 @@
 
 module.exports = {
     getUserCookie: async(req, res) => {
+        console.log(req.session);
         if (req.session.user) {
             const userDTO = {
                 email: req.session.user.email,
