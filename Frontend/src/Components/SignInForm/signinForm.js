@@ -51,10 +51,7 @@ export default function Signin() {
       sessionStorage.setItem('userFullName', result);
       setTimeout(() => { close(); reset(); }, 1000);
     }).catch((result) => {
-      if (result.response.status === 409) {
         showError("Email Or Password Are Not Correct")
-      }
-      else console.log(result.response)
     }).finally(() => { setTimeout(() => { setLoading(false); }, 2000); });
   };
 

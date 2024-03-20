@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const Users = require('./API/Models/Users');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+
+require('dotenv').config();
 
 const getUserById = async (uid) => {
     try {
@@ -64,4 +69,17 @@ const emailHtml = (userName, Oid) => {
 `)
 };
 
-module.exports = { getUserById, emailHtml };
+const authenticateToken = (token) => {
+    token = token.authorization ? token.authorization.split(' ')[1] : null;
+    if (!token) return false;
+
+    jwt.verify(token, process.env.secret_key, (err, decoded) => {
+        if (err) return false
+
+        token = decoded;
+    });
+
+    return token;
+}
+
+module.exports = { getUserById, emailHtml,authenticateToken };

@@ -5,7 +5,6 @@ import { Toast } from 'primereact/toast';
 
 
 import Translate from 'translate';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const CarDetailsContext = createContext();
@@ -21,8 +20,9 @@ export const CarDetailsProvider = ({ children }) => {
     const addNewCarDetails = (carNumber) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const datagov = await axios.get(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&q=${carNumber}`);
-                const data = datagov.data.result.records[0];
+                const response = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&q=${carNumber}`);
+                const datagov = await response.json();
+                const data = datagov.result.records[0];
 
                 if (data !== undefined) {
                     if (carNumber.length === 7) {

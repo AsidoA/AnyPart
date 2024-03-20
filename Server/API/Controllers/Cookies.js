@@ -1,16 +1,17 @@
-
+const jwt = require('jsonwebtoken');
+const {authenticateToken} = require('../../utils')
 
 module.exports = {
     getUserCookie: async(req, res) => {
-        console.log(req.session);
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const userDTO = {
-                email: req.session.user.email,
-                address: req.session.user.address,
-                city: req.session.user.city,
-                type: req.session.user.type,
-                fullname: req.session.user.fullname,
-                phone: req.session.user.phone
+                email: decodedToken.email,
+                address: decodedToken.address,
+                city: decodedToken.city,
+                type: decodedToken.type,
+                fullname: decodedToken.fullname,
+                phone: decodedToken.phone
             };
             return res.status(200).json(userDTO)
         }

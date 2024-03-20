@@ -3,13 +3,14 @@ const Orders = require('../Models/Orders');
 
 const { ObjectId } = mongoose.Types;
 const {clients,createEventStream} = require('../Routes/sseRoute')
+const {authenticateToken} = require('../../utils')
 
 
 
 module.exports = {
     addNewOrder: (req, res) => {
-        
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const { carDetails, parts, Odate, brandImg, carTitel } = req.body;
             if (parts.length !== 0) {
                 const dateObject = new Date(Odate);
@@ -20,7 +21,7 @@ module.exports = {
 
                 const Order = new Orders({
                     _id: new mongoose.Types.ObjectId(),
-                    carTitel, carDetails, parts, Uid: new ObjectId(req.session.user.uid), Odate: formattedDate, brandImg, status: [],
+                    carTitel, carDetails, parts, Uid: new ObjectId(decodedToken.uid), Odate: formattedDate, brandImg, status: [],
                     suplliers: []
                 });
 
@@ -36,15 +37,16 @@ module.exports = {
         else return res.status(401).json({ Msg: "Session Is Expired" })
     },
     updateOrder: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const offer = {
                 Oid: req.params.oid,
-                Sid: req.session.user.uid,
-                Saddress: req.session.user.address,
-                Scity: req.session.user.city,
-                Semail: req.session.user.email,
-                Sfullname: req.session.user.fullname,
-                Sphone: req.session.user.phone,
+                Sid: decodedToken.uid,
+                Saddress: decodedToken.address,
+                Scity: decodedToken.city,
+                Semail: decodedToken.email,
+                Sfullname: decodedToken.fullname,
+                Sphone: decodedToken.phone,
                 parts: req.body
             }
             Orders.updateOne(
@@ -52,7 +54,7 @@ module.exports = {
                 {
                     $push: {
                         suplliers: { $each: [offer] },
-                        status: { $each: [req.session.user.email] }
+                        status: { $each: [decodedToken.email] }
                     }
                 }
             ).then(() => {
@@ -66,21 +68,24 @@ module.exports = {
         } else return res.status(401).json({ Msg: "Session Is Expired" })
     },
     getAllOrders: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Orders.find({}).sort({ _id: -1 }).then((orders) => {
                 return res.status(200).json(orders)
             })
         } else return res.status(401).json({ Msg: "Session Is Expired" })
     },
     getOrderByUid: (req, res) => {
-        if (req.session.user) {
-            Orders.find({ Uid: req.session.user.uid }).sort({ _id: -1 }).then((orders) => {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
+            Orders.find({ Uid: decodedToken.uid }).sort({ _id: -1 }).then((orders) => {
                 return res.status(200).json(orders)
             })
         } else return res.status(401).json({ Msg: "Session Is Expired" })
     },
     deleteOrder: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Orders.deleteOne({ _id: req.params.oid }).then(() => {
                 clients.forEach(client => {
                     createEventStream(client, 'Update Order');

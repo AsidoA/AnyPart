@@ -2,20 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
 
 require('dotenv').config();
 const app = express();
 
-
-app.use(session({
-    secret: 'AnyPartSession',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 120,secure:true,sameSite:'none'},
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_CONN, dbName: 'anypartdb', collectionName: 'sessions' })
-}));
 app.enable('trust proxy');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

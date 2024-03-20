@@ -5,8 +5,6 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { createAnimatedIcon } from '../Utils'
 
-
-
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -27,7 +25,7 @@ export function AuthProvider({ children }) {
   }, [user]);
 
   const signIn = () => {
-      axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true}).then((response) => {
+      axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true,headers:{'Authorization': `Bearer ${Cookies.get('token')}`,'Content-Type': 'application/json'}}).then((response) => {
         setUser(response.data);
         if (response.data.type === process.env.REACT_APP_TYPE)
           navigate(process.env.REACT_APP_ADMIN_ROUTE)
@@ -45,7 +43,7 @@ export function AuthProvider({ children }) {
   };
 
   if (user) {
-    axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true })
+    axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true,headers:{'Authorization': `Bearer ${Cookies.get('token')}`,'Content-Type': 'application/json'}})
       .then(() => { return true; }).catch(() => {
         setVisible(true);
         return false;

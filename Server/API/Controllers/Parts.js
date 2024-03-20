@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const Parts = require('../Models/Parts');
+const {authenticateToken} = require('../../utils')
 
 module.exports = {
     addNewPart: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const { name, category } = req.body;
 
             const Part = new Parts({
@@ -18,7 +20,8 @@ module.exports = {
         else return res.status(401).json({ Msg: "Session Is Expired" })
     },
     updatePart: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             if (req.body.category) req.body.category = new mongoose.Types.ObjectId(req.body.category);
             Parts.updateOne({ _id: req.params.pid }, req.body).then(() => {
                 return res.status(200).json({ Msg: "Part id: " + req.params.pid + " Updated" });
@@ -26,7 +29,8 @@ module.exports = {
         } else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     deletePart: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Parts.updateOne({ _id: req.params.pid }, { $set: { notInStock: true } }).then(() => {
                 return res.status(200).json({ Msg: "Part Not In Stock:" + " " + req.params.pid });
             }).catch(err => { console.error(err) })

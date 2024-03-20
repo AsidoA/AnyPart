@@ -1,20 +1,24 @@
 const mongoose = require('mongoose');
-const Notifications = require('../Models/Notifications')
+const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const Notifications = require('../Models/Notifications')
 const utils = require('../../utils');
+
 require('dotenv').config();
 const { ObjectId } = mongoose.Types;
 const {clients,createEventStream} = require('../Routes/sseRoute')
+const {authenticateToken} = require('../../utils')
 
 module.exports = {
     addNewNotifi: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const { fullNameShortCut, content, uid, type, oid, titel } = req.body;
             let pickUid
             if (type === 'private')
                 pickUid = uid;
             else
-                pickUid = new ObjectId(req.session.user.uid)
+                pickUid = new ObjectId(decodedToken.uid)
 
             const Notification = new Notifications({
                 _id: new mongoose.Types.ObjectId(),
@@ -54,9 +58,10 @@ module.exports = {
         } else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     updateNotifi: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             if (req.body.status) {
-                Notifications.updateOne({ _id: req.params.nid }, { $push: { status: req.session.user.email } }).then(() => {
+                Notifications.updateOne({ _id: req.params.nid }, { $push: { status: decodedToken.email } }).then(() => {
                     return res.status(200).json({ Msg: "Notification id: " + req.params.nid + " Updated" })
                 });
             } else {
@@ -67,19 +72,22 @@ module.exports = {
         } else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     getAllNotifi: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Notifications.find({ type: 'private/supplier' }).sort({ _id: -1 }).then((notifications) => { return res.status(200).json(notifications) }).catch(err => { console.log(err); });
         } else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     getNotifiById: (req, res) => {
-        if (req.session.user) {
-            Notifications.find({ uid: req.session.user.uid }).sort({ _id: -1 }).then((notifications) => {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
+            Notifications.find({ uid: decodedToken.uid }).sort({ _id: -1 }).then((notifications) => {
                 return res.status(200).json(notifications)
             }).catch(err => { console.log(err); });
         } else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     deleteNotifi: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Notifications.deleteOne({ _id: req.params.nid }).then(() => {
                 return res.status(200).json({ Msg: req.params.nid + ' Deleted' });
             }).catch(err => { console.log(err); });

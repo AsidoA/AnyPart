@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const Garages = require('../Models/Garages');
+const {authenticateToken} = require('../../utils')
 
 module.exports = {
     addNewGarage: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const { gname, gemail, gdesc, gaddress, gcity, ghours,gimg,gphone } = req.body;
 
             const Garage = new Garages({
@@ -18,7 +20,8 @@ module.exports = {
         else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     updateGarage: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Garages.updateOne({ _id: req.params.gid }, req.body).then(() => {
                 return res.status(200).json({ Msg: "Garage id: " + req.params.gid + " Updated" });
             }).catch(err =>{console.error(err)});
@@ -30,7 +33,8 @@ module.exports = {
         .catch(err=>{console.error(err)})
     },
     deleteGarage:(req,res)=>{
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             Garages.deleteOne({ _id: req.params.gid }).then(() => {
                 return res.status(200).json({ Msg: "Deleted Garage:" + " " + req.params.gid });
             }).catch(err=>{console.error(err)})

@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const categories = require('../Models/Categories');
 const Categories = require('../Models/Categories');
+const {authenticateToken} = require('../../utils')
 
 module.exports = {
     addNewCategory: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             const { name } = req.body;
 
             const Category = new Categories({ _id: new mongoose.Types.ObjectId(), name });
@@ -16,7 +18,8 @@ module.exports = {
         } else return res.status(401).json({ Msg: "Session Is Expired" });
     },
     updateCategory: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             categories.updateOne({ _id: req.params.cid }, req.body).then(() => {
                 return res.status(200).json({ Msg: "Category id: " + req.params.cid + " Updated" });
             });
@@ -33,7 +36,8 @@ module.exports = {
             }).catch((err) => { console.log(err) });
     },
     deleteCategory: (req, res) => {
-        if (req.session.user) {
+        const decodedToken = authenticateToken(req.headers);
+        if (decodedToken) {
             categories.deleteOne({ _id: req.params.cid }).then(() => {
                 return res.status(200).json({ Msg: req.params.cid + ' Deleted' });
             }).catch(err => { console.log(err); });

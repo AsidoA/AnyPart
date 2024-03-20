@@ -1,6 +1,9 @@
 const users = require('../Models/Users');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const CryptoJS = require('crypto-js');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 module.exports = {
 
@@ -23,30 +26,24 @@ module.exports = {
     },
     Login: (req, res) => {
         const { email, password } = req.body;
-            users.find({ email: email }).then((result) => {
-                if (result.length == 0)
-                    return res.status(409).json({ Msg: 'User Not Found' });
+        users.find({ email: email }).then((result) => {
+            if (result.length == 0)
+                return res.status(409).json({ Msg: 'User Not Found' });
 
-                bcrypt.compare(password, result[0].password).then((compared) => {
-                    if (!compared)
-                        return res.status(409).json({ Msg: 'Password incorrect' });
+            bcrypt.compare(password, result[0].password).then((compared) => {
+                if (!compared)
+                    return res.status(409).json({ Msg: 'Password incorrect' });
 
-                    const UserData = { uid: result[0]._id, email: email, address: result[0].address, city: result[0].city, type: result[0].type, fullname: result[0].user_name, phone: result[0].phone };
-                    req.session.user = UserData;
-                    req.session.save();
-                    return res.status(200).json(UserData.fullname);
-                })
-            }).catch((err) => {console.log(err)})
+                const userDataPayLoad = { uid: result[0]._id, email: email, address: result[0].address, city: result[0].city, type: result[0].type, fullname: result[0].user_name, phone: result[0].phone };
+                const token = jwt.sign(userDataPayLoad , process.env.secret_key, {expiresIn: '1h',});
+                res.cookie('token',token);
+
+                return res.status(200).json(userDataPayLoad.fullname);
+            })
+        }).catch((err) => { console.log(err) })
     },
     Logout: (req, res) => {
-        req.session.destroy((err) => {
-            if (err) {
-                console.error('Error destroying session:', err);
-                return res.status(500).json({ Msg: 'Error logging out' });
-            }
-            res.clearCookie(req.sessionID);
-
+            res.clearCookie('token');
             return res.status(200).json({ Msg: 'Logged out' });
-        });
     }
 };

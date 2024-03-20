@@ -115,7 +115,7 @@ export default function SideBarView() {
                                             <div className="flex flex-row">
                                                 <ConfirmPopup
                                                     group="headless"
-                                                    content={() =>
+                                                    content={
                                                         <div className="border-round p-3">
                                                             <span>Enter new license plate to update car details</span>
                                                             <div className="flex align-items-center gap-2 mt-3">
