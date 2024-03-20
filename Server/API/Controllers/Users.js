@@ -36,7 +36,7 @@ module.exports = {
 
                 const userDataPayLoad = { uid: result[0]._id, email: email, address: result[0].address, city: result[0].city, type: result[0].type, fullname: result[0].user_name, phone: result[0].phone };
                 const token = jwt.sign(userDataPayLoad , process.env.secret_key, {expiresIn: '1h',});
-                res.cookie('token', token, { secure: true, httpOnly: true, domain: 'anypart.netlify.app' });
+                res.cookie('token', token, { secure: true, httpOnly: true, sameSite:'none' });
 
                 return res.status(200).json(userDataPayLoad.fullname);
             })
