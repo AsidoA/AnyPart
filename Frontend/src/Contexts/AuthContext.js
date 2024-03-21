@@ -24,9 +24,10 @@ export function AuthProvider({ children }) {
     else Cookies.remove('User');
   }, [user]);
 
-  const signIn = () => {
-      axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true,headers:{'Authorization': `Bearer ${Cookies.get('token')}`,'Content-Type': 'application/json'}}).then((response) => {
+  const signIn = (token) => {
+      axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true,headers:{'Authorization': `Bearer ${token}`,'Content-Type': 'application/json'}}).then((response) => {
         setUser(response.data);
+        Cookies.set('token',token);
         if (response.data.type === process.env.REACT_APP_TYPE)
           navigate(process.env.REACT_APP_ADMIN_ROUTE)
       }).catch(err => { console.log(err) })

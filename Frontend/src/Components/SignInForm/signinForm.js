@@ -45,8 +45,8 @@ export default function Signin() {
       email: data.email,
       password: data.password
     }, { withCredentials: true }).then((response) => {
-      signIn();
-      const words = (response.data.split(' ')).map(word => word.slice(0, 1));
+      signIn(response.data[1]);
+      const words = (response.data[0].split(' ')).map(word => word.slice(0, 1));
       const result = (words.join('')).toUpperCase();
       sessionStorage.setItem('userFullName', result);
       setTimeout(() => { close(); reset(); }, 1000);
