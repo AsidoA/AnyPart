@@ -42,7 +42,6 @@ module.exports = {
         }).catch((err) => { console.log(err) })
     },
     Logout: (req, res) => {
-            res.clearCookie('token');
             return res.status(200).json({ Msg: 'Logged out' });
     }
 };

@@ -38,6 +38,7 @@ export function AuthProvider({ children }) {
     Cookies.remove('User');
     Cookies.remove('carDetails');
     Cookies.remove('cartDetails');
+    Cookies.remove('token')
     axios.get(process.env.REACT_APP_SROUTE + '/users/logout', { withCredentials: true });
     navigate('/');
     setTimeout(() => { window.location.reload(); }, 200);
