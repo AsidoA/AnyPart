@@ -6,7 +6,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 const app = express();
 
-app.enable('trust proxy');
+app.enable('trust proxy',1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: ['https://anypart.netlify.app','http://localhost:3000'] }));
