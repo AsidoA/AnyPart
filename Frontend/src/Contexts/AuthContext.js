@@ -24,8 +24,9 @@ export function AuthProvider({ children }) {
     else Cookies.remove('User');
   }, [user]);
 
-  const signIn = (token) => {
+  const signIn = (token,shortName) => {
       axios.get(process.env.REACT_APP_SROUTE + '/cookie', { withCredentials: true,headers:{'Authorization': `Bearer ${token}`,'Content-Type': 'application/json'}}).then((response) => {
+        response.data.shortName = shortName;
         setUser(response.data);
         Cookies.set('token',token);
         if (response.data.type === process.env.REACT_APP_TYPE)

@@ -45,10 +45,9 @@ export default function Signin() {
       email: data.email,
       password: data.password
     }, { withCredentials: true }).then((response) => {
-      signIn(response.data[1]);
       const words = (response.data[0].split(' ')).map(word => word.slice(0, 1));
       const result = (words.join('')).toUpperCase();
-      sessionStorage.setItem('userFullName', result);
+      signIn(response.data[1],result);
       setTimeout(() => { close(); reset(); }, 1000);
     }).catch((result) => {
         showError("Email Or Password Are Not Correct")

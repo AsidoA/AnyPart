@@ -21,7 +21,6 @@ export default function Navbar() {
     const { user, signOut } = useAuth();
     const menu = useRef(null);
     const navigate = useNavigate();
-    const shortFName = sessionStorage.getItem('userFullName')
 
     const Menuitems = [
         {
@@ -62,7 +61,7 @@ export default function Navbar() {
             {user ? (
                 <div className="card flex justify-content-center">
                     <TieredMenu model={Menuitems} popup ref={menu} breakpoint="767px" />
-                    <Avatar className='avatar-signedin' label={shortFName} size="large" onClick={(e) => menu.current.toggle(e)} />
+                    <Avatar className='avatar-signedin' label={user.shortName} size="large" onClick={(e) => menu.current.toggle(e)} />
                 </div>
             ) : (
                 <div className="flex">
