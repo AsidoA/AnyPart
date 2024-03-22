@@ -88,7 +88,7 @@ export default function UserProfile() {
                 <>
                     <Fieldset className="ml-6 mt-4 shadow-2" style={{ width: '350px' }}>
                         <div className="img-profile">
-                            <Avatar label={sessionStorage.getItem('userFullName')} size="xlarge" style={{ backgroundColor: '#9c27b0', color: '#ffffff', width: '250px', height: '250px' }} />
+                            <Avatar label={user.shortName} size="xlarge" style={{ backgroundColor: '#9c27b0', color: '#ffffff', width: '250px', height: '250px' }} />
                         </div>
                         <h2>{user.fullname}</h2>
                         <div className="user-details-container">

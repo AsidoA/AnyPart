@@ -138,7 +138,7 @@ const Notification = ({ notification, updateVisibleRight }) => {
                 <Divider />
                 <p className='notification-titel font-bold'>{notification.titel}</p>
                 <div className="notification card flex flex-row">
-                    <Avatar className="mr-3 p-2" size="large" label={notification.fullNameShortCut} style={{ backgroundColor: '#2196F3', color: '#ffffff', width: '70px' }} />
+                    <Avatar className="mr-3 p-2" size="large" label={user.shortName} style={{ backgroundColor: '#2196F3', color: '#ffffff', width: '70px' }} />
                     <p className='mt-2'>{notification.content}</p>
                 </div>
             </div>

@@ -49,7 +49,7 @@ export const NotificationProvider = ({ children }) => {
     const addNewNotification = async (carTitel, Oid) => {
         try {
             await axios.post(process.env.REACT_APP_SROUTE + '/notifications', {
-                fullNameShortCut: sessionStorage.getItem('userFullName'), titel: `Order Number ${Oid}`, content: `Order for ${carTitel} Has Been Created By  Click to see it in youre profile`, type: 'private/supplier', oid: Oid
+                fullNameShortCut: user.shortName, titel: `Order Number ${Oid}`, content: `Order for ${carTitel} Has Been Created By  Click to see it in youre profile`, type: 'private/supplier', oid: Oid
             }, { withCredentials: true }).then(() => { sessionStorage.setItem('Cart', []); })
             setTimeout(() => {
                 setUpdate(true);
@@ -62,10 +62,8 @@ export const NotificationProvider = ({ children }) => {
 
     const addOrderUpdatedNotification = async (Oid, orderUid, userName) => {
         try {
-            let fullNameShortCut = sessionStorage.getItem('userFullName');
-
             await axios.post(process.env.REACT_APP_SROUTE + '/notifications', {
-                fullNameShortCut: fullNameShortCut,
+                fullNameShortCut: user.shortName,
                 uid: orderUid, titel: `Order Number ${Oid}`, content: `Offer from ${userName} Has Been Updated Click to see it in youre profile`,
                 type: 'private', oid: Oid
             }, { withCredentials: true }).then(() => { sessionStorage.setItem('Cart', []); },)

@@ -207,6 +207,7 @@ export default function OrderDetails({ order }) {
                 })
 
             })
+            if(minPrice === 0) return <p className="text-bold mt-3" style={{ color: 'blue', textAlign: 'center' }}>No Relevant Offers yet</p>
             return <p className="text-bold mt-3" style={{ color: 'green', textAlign: 'center' }}>{minPrice} $</p>
         }
     }
