@@ -34,7 +34,7 @@ export default function Navbar() {
         {
             label: 'Log Out',
             icon: 'pi pi-fw pi-power-off',
-            command: () => {signOut();}
+            command: () => { signOut(); }
         }
     ];
 
@@ -74,8 +74,8 @@ export default function Navbar() {
 
 
     return (
-        <div className="card nav">
-            <Menubar model={items} start={start} end={end} />
-        </div>
+            <div className="card nav">
+                <Menubar model={items} start={start} end={end} />
+            </div>
     )
 }

@@ -15,9 +15,6 @@
 
 
   @media (max-width:629px) {
-    body{
-        width: 90%;
-    }
     .intro_img,.sub_titel{
       display: none;
       
