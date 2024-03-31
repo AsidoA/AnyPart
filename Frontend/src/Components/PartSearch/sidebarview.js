@@ -5,7 +5,6 @@ import { Button } from 'primereact/button';
 import { DataScroller } from 'primereact/datascroller';
 import { useToast } from '../useToastC/useToast';
 import { Toast } from 'primereact/toast';
-import { Badge } from 'primereact/badge';
 import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
@@ -94,101 +93,102 @@ export default function SideBarView() {
 
 
     return (
-        <div className="card flex justify-content-center sidebar-view">
-            <Sidebar className="w-full md:w-20rem lg:w-30rem" visible={visible} onHide={() => setVisible(false)}>
-                {carDetails._id ? (
-                    <div className="car-details-cart">
-                        <div className="car-container animate__animated animate__fadeIn">
-                            {!loading ? (
-                                <>
-                                    <div className="car-logo"><img src={carDetails.brandImg} alt='logo' /></div>
-                                    <div className="car_details">
-                                        <div className="card flex justify-content-center">
-                                            <Toast ref={toast} />
-                                            <Toast ref={toastBC} position="center" />
-                                        </div>
-                                        <div className=" p-sidebar-top details">
-                                            <h1 className="car-name">{carDetails.carTitel}</h1>
-                                            <h4>Engine Type: {carDetails.degem_manoa}</h4>
-                                            <h4>Year: {carDetails.shnat_yitzur}</h4>
-                                            <h4>Trim: {carDetails.ramat_gimur}</h4>
-                                            <div className="flex flex-row">
-                                                <ConfirmPopup
-                                                    group="headless"
-                                                    content={
-                                                        <div className="border-round p-3">
-                                                            <span>Enter new license plate to update car details</span>
-                                                            <div className="flex align-items-center gap-2 mt-3">
-                                                                <InputText className={pInvalidClassName()} value={updatedLicensePlate} onChange={(e) => setupdatedLicensePlate(e.target.value)} keyfilter="int" placeholder="License Plate" />
-                                                                <Button label="Update" disabled={pInvalidClassName().includes('false')} onClick={() => handleDetailsUpdate(updatedLicensePlate)} className="p-button-sm p-button-outlined text-green-500" />
+        <>
+            <div className="card flex justify-content-center">
+                <Button className="p-0 m-0 shadow-none sidebarview-btn" icon="pi pi-shopping-cart" severity="warning" onClick={() => setVisible(true)} text />
+                <span className="badge">{cart.length > 0 ? cart.length:0}</span>
+            </div>
+            <div className="card flex justify-content-center sidebar-view">
+                <Sidebar className="w-full md:w-20rem lg:w-30rem" visible={visible} onHide={() => setVisible(false)}>
+                    {carDetails._id ? (
+                        <div className="car-details-cart">
+                            <div className="car-container animate__animated animate__fadeIn">
+                                {!loading ? (
+                                    <>
+                                        <div className="car-logo"><img src={carDetails.brandImg} alt='logo' /></div>
+                                        <div className="car_details">
+                                            <div className="card flex justify-content-center">
+                                                <Toast ref={toast} />
+                                                <Toast ref={toastBC} position="center" />
+                                            </div>
+                                            <div className=" p-sidebar-top details">
+                                                <h1 className="car-name">{carDetails.carTitel}</h1>
+                                                <h4>Engine Type: {carDetails.degem_manoa}</h4>
+                                                <h4>Year: {carDetails.shnat_yitzur}</h4>
+                                                <h4>Trim: {carDetails.ramat_gimur}</h4>
+                                                <div className="flex flex-row">
+                                                    <ConfirmPopup
+                                                        group="headless"
+                                                        content={
+                                                            <div className="border-round p-3">
+                                                                <span>Enter new license plate to update car details</span>
+                                                                <div className="flex align-items-center gap-2 mt-3">
+                                                                    <InputText className={pInvalidClassName()} value={updatedLicensePlate} onChange={(e) => setupdatedLicensePlate(e.target.value)} keyfilter="int" placeholder="License Plate" />
+                                                                    <Button label="Update" disabled={pInvalidClassName().includes('false')} onClick={() => handleDetailsUpdate(updatedLicensePlate)} className="p-button-sm p-button-outlined text-green-500" />
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    }
-                                                />
-                                                <h4 className="license-plate flex-none" onClick={confirm1}>{carDetails.mispar_rechev}</h4>
-                                                <div className="update-number">
+                                                        }
+                                                    />
+                                                    <h4 className="license-plate flex-none" onClick={confirm1}>{carDetails.mispar_rechev}</h4>
+                                                    <div className="update-number">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </>
+                                ) : (
+                                    <div className="loading-spinner card flex justify-content-end mt-3 animate__animated animate__fadeIn">
+                                        <i className="pi pi-spin pi-spinner text-orange-500 mr-5" style={{ fontSize: '6rem' }}></i>
+                                    </div>
+                                )}
+
+                            </div>
+
+                            {!created && (
+                                <>
+                                    <div className="products-cart ">
+                                        <Divider />
+                                        <ProductsCart ></ProductsCart>
+                                    </div>
+                                    <div className="btn-create-order">
+                                        <Button label="Create Order" className='btn-create-order shadow-none font-light' onClick={handleButtonClick} severity="warning" text raised />
                                     </div>
                                 </>
-                            ) : (
-                                <div className="loading-spinner card flex justify-content-end mt-3 animate__animated animate__fadeIn">
-                                    <i className="pi pi-spin pi-spinner text-orange-500 mr-5" style={{ fontSize: '6rem' }}></i>
-                                </div>
                             )}
-
+                        </div>) : (
+                        <div className="carNotExist text-center" style={{ textAlign: 'center', marginTop: '6px', marginBottom: 'auto' }}>
+                            {createAnimatedIcon(
+                                "https://cdn.lordicon.com/rbztokoj.json",
+                                "loop",
+                                "primary:#121331,secondary:#e88c30",
+                                { width: '200px', height: '200px', marginBottom: '-50px', marginTop: '150px' }
+                            )}
+                            <h2>Missing Car Details</h2>
+                            <p>Provide A Vaild <span className="font-bold">License Number </span> And Sign In Your Account To Create An Order </p>
+                            <div>
+                                <InputText className={pInvalidClassName()} value={updatedLicensePlate} onChange={(e) => setupdatedLicensePlate(e.target.value)} keyfilter="int" placeholder="License Number" />
+                            </div>
+                            <Button label='Find Your Car' icon="pi pi-search" disabled={pInvalidClassName().includes('false')} onClick={() => handleDetailsUpdate(updatedLicensePlate)} className="p-button-xl text-center text-orange-500 shadow-none" text />
                         </div>
+                    )}
 
-                        {!created && (
-                            <>
-                                <div className="products-cart ">
-                                    <Divider />
-                                    <ProductsCart ></ProductsCart>
-                                </div>
-                                <div className="btn-create-order">
-                                    <Button label="Create Order" className='btn-create-order shadow-none font-light' onClick={handleButtonClick} severity="warning" text raised />
-                                </div>
-                            </>
-                        )}
-                    </div>) : (
-                    <div className="carNotExist text-center" style={{ textAlign: 'center', marginTop: '6px', marginBottom: 'auto' }}>
-                        {createAnimatedIcon(
-                            "https://cdn.lordicon.com/rbztokoj.json",
-                            "loop",
-                            "primary:#121331,secondary:#e88c30",
-                            { width: '200px', height: '200px', marginBottom: '-50px', marginTop: '150px' }
-                        )}
-                        <h2>Missing Car Details</h2>
-                        <p>Provide A Vaild <span className="font-bold">License Number </span> And Sign In Your Account To Create An Order </p>
-                        <div>
-                            <InputText className={pInvalidClassName()} value={updatedLicensePlate} onChange={(e) => setupdatedLicensePlate(e.target.value)} keyfilter="int" placeholder="License Number" />
-                        </div>
-                        <Button label='Find Your Car' icon="pi pi-search" disabled={pInvalidClassName().includes('false')} onClick={() => handleDetailsUpdate(updatedLicensePlate)} className="p-button-xl text-center text-orange-500 shadow-none" text />
-                    </div>
-                )}
-
-                {created && (
-                    <div className="order-created animate__heartBeat">
-                        {createAnimatedIcon(
-                            "https://cdn.lordicon.com/zawvkqfy.json",
-                            "loop",
-                            "primary:#e88c30",
-                            { width: '150px', height: '150px', marginTop: '-50px' }
-                        )}
-                        <h1>Created Successfully !</h1>
-                        <p>All the offers will appear in your profile under this car details</p>
-                        <div>
-                            <Button label="Click to continue" severity="warning" onClick={handleContinueBtn} text />
-                        </div>
-                    </div>)}
-            </Sidebar>
-            <button className='sidebarview-btn' onClick={() => setVisible(true)}>
-                <i className="pi pi-shopping-cart shopping-cart-icon p-overlay-badge">
-                    <Badge value={cart.length}></Badge>
-                </i>
-            </button>
-        </div>
+                    {created && (
+                        <div className="order-created animate__heartBeat">
+                            {createAnimatedIcon(
+                                "https://cdn.lordicon.com/zawvkqfy.json",
+                                "loop",
+                                "primary:#e88c30",
+                                { width: '150px', height: '150px', marginTop: '-50px' }
+                            )}
+                            <h1>Created Successfully !</h1>
+                            <p>All the offers will appear in your profile under this car details</p>
+                            <div>
+                                <Button label="Click to continue" severity="warning" onClick={handleContinueBtn} text />
+                            </div>
+                        </div>)}
+                </Sidebar>
+            </div>
+        </>
     )
 };
 

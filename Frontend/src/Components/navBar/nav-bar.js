@@ -54,28 +54,28 @@ export default function Navbar() {
     const start = <a href="/"> <img alt="logo" src="https://ik.imagekit.io/zov6bak1a/logoAny.png?updatedAt=1685031605066" height="40" className="mr-2"></img></a>;
 
     const end = (
-        <div className="end-container flex flex-row justify-content-center card animate__animated animate__fadeInDown">
-            {user && (<div className="notification-btn"><Notifications /></div>)}
-            <div className="sidebaview-btn"><SideBarView /></div>
-            <Divider className="divider" layout="vertical" />
+        <div className="flex align-items-center gap-2 action-buttons">
+            {user &&(<div className='notification-btn'><Notifications /></div>)}
+            <div><SideBarView /></div>
+            <div><Divider className="divider" layout="vertical" /></div>
             {user ? (
-                <div className="card flex justify-content-center">
+                <div>
                     <TieredMenu model={Menuitems} popup ref={menu} breakpoint="767px" />
-                    <Avatar className='avatar-signedin' label={user.shortName} size="large" onClick={(e) => menu.current.toggle(e)} />
+                    <Avatar className='avatar-signedin' label={user.shortName} onClick={(e) => menu.current.toggle(e)} />
                 </div>
             ) : (
-                <div className="flex">
-                    <div className='mr-2'><Signin /></div>
+                <>
+                    <div className='signin-button'><Signin /></div>
                     <div><SignUp /></div>
-                </div>
+                </>
             )}
         </div>
     );
 
 
     return (
-            <div className="card nav">
-                <Menubar model={items} start={start} end={end} />
-            </div>
+        <div className="card nav">
+            <Menubar model={items} start={start} end={end} />
+        </div>
     )
 }

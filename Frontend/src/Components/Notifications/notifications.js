@@ -4,7 +4,7 @@ import { Sidebar } from 'primereact/sidebar';
 import { Divider } from 'primereact/divider';
 import { Avatar } from 'primereact/avatar';
 import { useNavigate } from "react-router-dom";
-import { Badge } from 'primereact/badge';
+import { Button } from 'primereact/button';
 
 import { createAnimatedIcon } from '../../Utils'
 import { useNotificationContext } from '../../Contexts/NotificationContext';
@@ -68,59 +68,59 @@ export default function Notifications() {
 
 
     return (
-        <div className="card">
-            <div className="flex gap-2 justify-content-center">
-                <button className="notification-btn" onClick={() => setVisibleRight(true)}>
-                    <i className="pi pi-bell notification-icon p-overlay-badge"><Badge value={notificationsCount}></Badge></i>
-                </button>
+        <>
+            <div className="card flex justify-content-center">
+                <Button className="p-0 m-0 shadow-none notification-btn" icon="pi pi-bell" severity="warning" onClick={() => setVisibleRight(true)} text />
+                <span className="badge">{notificationsCount}</span>
             </div>
-
-            <Sidebar className="w-full md:w-20rem lg:w-30rem" visible={visibleRight} position="right" onHide={() => setVisibleRight(false)}>
-                <div className="notifications-container">
-                    {noLastNotifications & noEarlierNotifications ? (
-                        <div className="no-notifications">
-                            {createAnimatedIcon(
-                                "https://cdn.lordicon.com/vspbqszr.json",
-                                "loop",
-                                "primary:#e88c30",
-                                { width: '225px', height: '225px',marginTop: '-70px'}
-                            )}
-                            <h2>No Notifications Yet !</h2>
-                            <p>When you get notifications, they'll show up here</p>
-                        </div>
-                    ) : (
-                        <>
-                            <div className="today-container">
-                                <h2>Last 24 Hours</h2>
-                                <div className="notification-container">
-                                    {lastNotificationsBody}
-
-                                    {noLastNotifications && (
-                                        <div className="empty-container">
-                                            <h4>No Last Notifications Yet</h4>
-                                        </div>
-                                    )}
-                                </div>
+            <div className="card">
+                <Sidebar className="w-full md:w-20rem lg:w-30rem" visible={visibleRight} position="right" onHide={() => setVisibleRight(false)}>
+                    <div className="notifications-container">
+                        {noLastNotifications & noEarlierNotifications ? (
+                            <div className="no-notifications">
+                                {createAnimatedIcon(
+                                    "https://cdn.lordicon.com/vspbqszr.json",
+                                    "loop",
+                                    "primary:#e88c30",
+                                    { width: '225px', height: '225px', marginTop: '-70px' }
+                                )}
+                                <h2>No Notifications Yet !</h2>
+                                <p>When you get notifications, they'll show up here</p>
                             </div>
-                            <div className="earlier-container">
-                                <h2>Earlier</h2>
-                                <div className="notification-container">
+                        ) : (
+                            <>
+                                <div className="today-container">
+                                    <h2>Last 24 Hours</h2>
+                                    <div className="notification-container">
+                                        {lastNotificationsBody}
 
-                                    {noEarlierNotifications && (
-                                        <div className="empty-container">
-                                            <h4>No Earlier Notifications Yet</h4>
-                                        </div>
-                                    )}
-
-                                    {earlierNotificationsBody}
+                                        {noLastNotifications && (
+                                            <div className="empty-container">
+                                                <h4>No Last Notifications Yet</h4>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        </>
-                    )}
+                                <div className="earlier-container">
+                                    <h2>Earlier</h2>
+                                    <div className="notification-container">
 
-                </div>
-            </Sidebar>
-        </div>
+                                        {noEarlierNotifications && (
+                                            <div className="empty-container">
+                                                <h4>No Earlier Notifications Yet</h4>
+                                            </div>
+                                        )}
+
+                                        {earlierNotificationsBody}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                    </div>
+                </Sidebar>
+            </div>
+        </>
     )
 }
 

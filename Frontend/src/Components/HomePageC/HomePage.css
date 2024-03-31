@@ -15,7 +15,7 @@
 
 
   @media (max-width:629px) {
-    .intro_img,.sub_titel{
+    .sub_titel{
       display: none;
       
     }
@@ -26,10 +26,7 @@
         margin-top:10px;
         width: 100px;
     }
-    .mobile-logo{
-      display:flex;
-      margin-top: 180px;
-    }
+
 
     
   }

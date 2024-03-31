@@ -41,16 +41,16 @@ export default function Signin() {
 
   const OnSubmit = (data, close) => {
     setLoading(true);
-    axios.post(process.env.REACT_APP_SROUTE+'/users/log/', {
+    axios.post(process.env.REACT_APP_SROUTE + '/users/log/', {
       email: data.email,
       password: data.password
     }, { withCredentials: true }).then((response) => {
       const words = (response.data[0].split(' ')).map(word => word.slice(0, 1));
       const result = (words.join('')).toUpperCase();
-      signIn(response.data[1],result);
+      signIn(response.data[1], result);
       setTimeout(() => { close(); reset(); }, 1000);
     }).catch((result) => {
-        showError("Email Or Password Are Not Correct")
+      showError("Email Or Password Are Not Correct")
     }).finally(() => { setTimeout(() => { setLoading(false); }, 2000); });
   };
 
@@ -59,10 +59,11 @@ export default function Signin() {
     <Popup
       trigger={
         <Button
+          className="p-0 m-0 shadow-none"
           icon="pi pi-fw pi-user"
           size="sm"
-          label=""
-          severity="info"
+          severity="warning"
+          text
         />
       }
       modal

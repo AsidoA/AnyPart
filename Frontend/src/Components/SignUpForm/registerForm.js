@@ -79,7 +79,7 @@ export default function SignUp() {
   return (
     <Popup
       trigger={
-        <Button size="sm" label="" icon="pi pi-pencil" />
+        <Button className="p-0 m-0 shadow-none" size="sm" text icon="pi pi-pencil" severity="warning" />
       }
       modal
       nested
