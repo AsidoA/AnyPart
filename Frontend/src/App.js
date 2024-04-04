@@ -20,6 +20,7 @@ import UserProfile from "./Components/UserProfile/Profiles";
 import PartSearch from "./Components/PartSearch/part-search";
 import GarageIndex from './Components/GarageIndex/GarageIndex';
 import Admin from "./Components/AdminPage/admin";
+import Footer from './Components/Footer/Footer';
 
 axios.interceptors.request.use(function (config) {
     const token = Cookies.get('token');
@@ -53,6 +54,7 @@ export default function App() {
                                                 <Route path={adminRoute} element={<Admin />} />
                                             </Routes>
                                         </main>
+                                        <Footer/>
                                     </div>
                                 </SSEProvider>
                             </NotificationProvider>

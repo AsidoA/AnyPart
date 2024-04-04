@@ -1,35 +1,47 @@
-
-
-.search-btn-icon{
-    margin-bottom: 5px;
-    margin-left: 5px;
+.search-parts {
+  background-image: url('../../../public/images/body-bg.png');
+  width: '100%';
+  height: '400px';
 }
 
-.sub_title{
-    color:aqua
+.titel{font-size: 45px;}
+.sub_titel{font-size: 43px;}
+
+.sec-div {
+  display: flex;
+  justify-content: center;
 }
 
-.mobile-logo{
-  display:none;
+.full-logo {
+  width: 37%;
+  height: 37%;
+  margin-bottom: 10px;
+}
+
+.car-number-input::placeholder{
+  color: white;
+}
+
+.search-btn-icon:hover{
+  cursor: pointer;
 }
 
 
-  @media (max-width:629px) {
-    .sub_titel{
-      display: none;
-      
-    }
-    .input_icon{
-        display:none;
-    }
-    #search-btn{
-        margin-top:10px;
-        width: 100px;
-    }
+@media (max-width:629px) {
 
+  .titel{font-size: 21px;}
+  .sub_titel{font-size: 19px;}
 
-    
+  .full-logo {
+    width: 100%;
+    height: 100%;
   }
+
+  #search-btn {
+    margin-top: 10px;
+    width: 100px;
+  }
+}
 
 
 input[type="number"]::-webkit-inner-spin-button,
