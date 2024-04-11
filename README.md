@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="[https://github.com/othneildrew/Best-README-Template](https://github.com/AsidoA/AnyPart)">
-    <img src="Frontend/public/logoAny.png" alt="Logo" width="80" height="80">
+    <img src="Frontend/public/logoAny.png" alt="Logo" width="80">
   </a>
 
   <h3 align="center">Any Part</h3>
@@ -14,35 +14,6 @@
 </div>
 
 
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -50,13 +21,8 @@
 
 The system will allow users (private/garages) to input the desired replacement parts, and field owners/importers will be able to submit price proposals for the parts. This way, the customer focuses their activities in one place and receives the most suitable deal for them.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [![React][React.js]][React-url]
 * [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -65,20 +31,17 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- GETTING STARTED -->
 ## System Tasks
-
-1. User Registration (Regular/Supplier).
-2. Retrieving Data from the Vehicle Registry Office Database.
-3. Creating Orders.
-4. Displaying Personal Profiles According to User Type.
-5. Viewing Orders and Price Proposals for Each Order (Regular User).
-6. Viewing All Orders from All Users (Supplier).
-7. Receiving Notifications on Order Status.
+1. Retrieving Data from the Vehicle Registry Office Database (Government Api).
+3. SSE (Server Sent Events).
+4. User Registration (Regular/Supplier).
+5. Creating Orders.
+6. Displaying Personal Profiles According to User Type.
+7. Viewing Orders and Price Proposals for Each Order (Regular User).
+8. Viewing All Orders from All Users (Supplier).
+9. Sent offers to all the users orders.
+10. Receiving Notifications on Order Status.
 
 ### Prerequisites
 
@@ -171,24 +134,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
 
 Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
