@@ -11,6 +11,7 @@
   </br>
     Automotive parts comparison</br>
     Gather price information from multiple suppliers and car lots to compare and find the best deals on used and new car parts
+    </p>
 </div>
 
 
