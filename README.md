@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="[https://github.com/othneildrew/Best-README-Template](https://github.com/AsidoA/AnyPart)">
-    <img src="Frontend/public/images/full-logo.png" alt="Logo" width="350">
+    <img src="Frontend/public/images/full-logo-bg.png" alt="Logo" width="500">
   </a>
 
   <p align="center">
